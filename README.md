@@ -21,9 +21,8 @@ supabase status
 - Schema and migrations are in `supabase/migrations`
 - Seed data is in `supabase/seed.sql`
 - Refer to `docs/architecture.md` for design and RLS details
-- Transfer model note: `docs/TRANSFER_RULES.md`
-- Demand snapshot and alerts recommendation: `docs/DEMAND_SNAPSHOT_AND_ALERTS.md`
 - Use `.env.example` for environment variable templates
+- Security hardening includes explicit privilege revokes to reduce GraphQL schema discoverability
 
 **Q: RLS policies seem broken. How do I debug?**
 A: Use Supabase Studio → DB Inspector → RLS Policies. Test with different user roles.

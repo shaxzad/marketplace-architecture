@@ -24,6 +24,7 @@
 - A `public_listings` view is provided for safe browse access to only active, approved, and public listings.
 - A `public_user_profiles` view exposes only public user fields.
 - Seller contact details remain hidden unless a buyer has an accepted contact request.
+- SQL privilege revokes are used to reduce GraphQL schema discoverability for `anon` and `authenticated` roles.
 
 ## 2) Listing lifecycle
 
@@ -49,7 +50,7 @@
 ## 3) RLS / access model
 
 ### Who can see listings
-- `active`, `approved`, and `is_public = true` listings are visible to everyone.
+- Listing row visibility is controlled by RLS policy conditions (`active`, `approved`, `is_public`) plus seller/admin access.
 - Seller may always see their own listings regardless of status.
 - Admin users can bypass restrictions.
 
@@ -78,6 +79,7 @@
 - The `alerts` table stores criteria as JSON, which is flexible but may need normalization later for query performance.
 - `status` and `moderation_status` are intentionally separated, which adds clarity but also requires careful frontend state handling.
 - Admin workflows are currently assumed to be handled via a role claim (`admin`) or service role.
+- Strict `SELECT` revokes reduce GraphQL discoverability but may require explicit grants later for public browsing use cases.
 
 ## Milestone 1 deliverables in repo
 - `supabase/schemas/0001_schema.sql`
@@ -85,5 +87,3 @@
 - `supabase/seed.sql`
 - `docs/architecture.md`
 - `docs/ERD.md`
-- `docs/TRANSFER_RULES.md`
-- `docs/DEMAND_SNAPSHOT_AND_ALERTS.md`
