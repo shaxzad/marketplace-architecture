@@ -85,9 +85,5 @@
 - `supabase/seed.sql`
 - `docs/architecture.md`
 - `docs/ERD.md`
-
-## Next transfer step
-1. Push this repo into the client-owned Supabase project.
-2. Run `supabase db reset` in the client environment to load schema and seed data.
-3. Confirm RLS policies by testing as buyer, seller, and anonymous user.
-4. Use the `public_listings` and `public_user_profiles` views in the frontend to avoid accidental sensitive exposure.
+- `docs/TRANSFER_RULES.md`
+- `docs/DEMAND_SNAPSHOT_AND_ALERTS.md`

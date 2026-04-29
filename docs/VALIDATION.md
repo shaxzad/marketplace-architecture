@@ -37,8 +37,9 @@
   - Allows: buyer (creator) OR seller (listing owner) OR admin
 
 ### No overly permissive policies?
-- ✅ No `true` policies found
-- ✅ All policies use JWT claims or function logic
+- ⚠️ `events_select_public` intentionally uses `using (true)` to allow public event discovery.
+- ✅ All other user-sensitive tables (`users`, `listings`, `contact_requests`, `alerts`) use scoped JWT/function checks.
+- ✅ Admin role validated via: `public.is_admin()` function
 - ✅ Admin role validated via: `public.is_admin()` function
 
 ---
