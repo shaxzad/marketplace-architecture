@@ -64,8 +64,20 @@
 - Sellers can accept or reject the request.
 - Only after acceptance can the buyer access seller contact details.
 - This keeps initial browsing and searching safe while still enabling direct contact.
+- In MVP, `contact_requests` is the transfer-rule model (request, accept/reject, contact unlock); event approval constraints are represented by `events.requires_approval` and enforced in app workflow.
 
-## 4) Key design decisions
+## 4) Demand snapshot / alerts recommendation (MVP-safe)
+
+- Keep `alerts` as lightweight watcher subscriptions with JSON criteria (`price`, `keywords`, optional `event_id` scope).
+- For MVP, prioritize event/listing matching logic first and avoid over-normalizing alert criteria.
+- For post-MVP analytics, add an additive `demand_snapshots` table (or materialized view) with periodic aggregates:
+  - event/listing demand counts
+  - accepted contact-request counts
+  - price trend metrics (min/median/max)
+- Suggested cadence: hourly baseline, tighter interval near event dates.
+- This keeps MVP simple while leaving a clean path for trend indicators and alert ranking.
+
+## 5) Key design decisions
 
 ### Excluded from MVP
 - Full messaging/chat system.
@@ -87,3 +99,4 @@
 - `supabase/seed.sql`
 - `docs/architecture.md`
 - `docs/ERD.md`
+- `docs/VALIDATION.md`

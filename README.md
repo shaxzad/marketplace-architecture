@@ -21,6 +21,7 @@ supabase status
 - Schema and migrations are in `supabase/migrations`
 - Seed data is in `supabase/seed.sql`
 - Refer to `docs/architecture.md` for design and RLS details
+- Validation checklist is in `docs/VALIDATION.md`
 - Use `.env.example` for environment variable templates
 - Security hardening includes explicit privilege revokes to reduce GraphQL schema discoverability
 
