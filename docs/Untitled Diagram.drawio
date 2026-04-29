@@ -1,0 +1,70 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="ERD" id="EubTgyH4pYlN6i-zDmgr">
+    <mxGraphModel dx="1174" dy="716" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="IcXP9a9m12b7i7FLW2My-18" parent="1" style="shape=swimlane;rounded=1;html=1;startSize=30;strokeWidth=2;fillColor=#ffffff;swimlaneFillColor=#f5f5f5;" value="Users (users)" vertex="1">
+          <mxGeometry height="160" width="260" x="40" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IcXP9a9m12b7i7FLW2My-19" parent="IcXP9a9m12b7i7FLW2My-18" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;" value="id uuid PK default gen_random_uuid()&lt;br&gt;name text not null&lt;br&gt;display_name text&lt;br&gt;public_bio text&lt;br&gt;contact_email text&lt;br&gt;contact_phone text&lt;br&gt;created_at timestamptz not null default now()" vertex="1">
+          <mxGeometry height="130" width="260" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="IcXP9a9m12b7i7FLW2My-20" parent="1" style="shape=swimlane;rounded=1;html=1;startSize=30;strokeWidth=2;fillColor=#ffffff;swimlaneFillColor=#f5f5f5;" value="Events (events)" vertex="1">
+          <mxGeometry height="200" width="270" x="360" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="IcXP9a9m12b7i7FLW2My-21" parent="IcXP9a9m12b7i7FLW2My-20" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;" value="id uuid PK default gen_random_uuid()&lt;br&gt;name text not null&lt;br&gt;description text&lt;br&gt;location text&lt;br&gt;starts_at timestamptz&lt;br&gt;ends_at timestamptz&lt;br&gt;requires_approval boolean not null default false&lt;br&gt;status event_status not null default &#39;scheduled&#39;&lt;br&gt;created_at timestamptz not null default now()" vertex="1">
+          <mxGeometry height="170" width="270" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="IcXP9a9m12b7i7FLW2My-22" parent="1" style="shape=swimlane;rounded=1;html=1;startSize=30;strokeWidth=3;fillColor=#ffffff;swimlaneFillColor=#eaf2ff;" value="Listings (listings)" vertex="1">
+          <mxGeometry height="250" width="450" x="270" y="840" as="geometry" />
+        </mxCell>
+        <mxCell id="IcXP9a9m12b7i7FLW2My-23" parent="IcXP9a9m12b7i7FLW2My-22" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;" value="id uuid PK default gen_random_uuid()&lt;br&gt;event_id uuid FK -&gt; events.id (on delete cascade) not null&lt;br&gt;seller_id uuid FK -&gt; users.id (on delete cascade) not null&lt;br&gt;title text not null&lt;br&gt;description text&lt;br&gt;price numeric(12,2) not null check (price &gt;= 0)&lt;br&gt;status listing_status not null default &#39;draft&#39;&lt;br&gt;moderation_status listing_moderation_status not null default &#39;pending_review&#39;&lt;br&gt;expires_at timestamptz&lt;br&gt;flagged_reason text&lt;br&gt;is_public boolean not null default false&lt;br&gt;created_at timestamptz not null default now()&lt;br&gt;updated_at timestamptz not null default now()" vertex="1">
+          <mxGeometry height="220" width="440" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="IcXP9a9m12b7i7FLW2My-24" parent="1" style="shape=swimlane;rounded=1;html=1;startSize=30;strokeWidth=2;fillColor=#ffffff;swimlaneFillColor=#f5f5f5;arcSize=19;" value="Contact Requests (contact_requests)" vertex="1">
+          <mxGeometry height="200" width="310" x="15" y="585" as="geometry" />
+        </mxCell>
+        <mxCell id="IcXP9a9m12b7i7FLW2My-25" parent="IcXP9a9m12b7i7FLW2My-24" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;" value="id uuid PK default gen_random_uuid()&lt;br&gt;listing_id uuid FK -&gt; listings.id (on delete cascade) not null&lt;br&gt;buyer_id uuid FK -&gt; users.id (on delete cascade) not null&lt;br&gt;message text&lt;br&gt;status contact_request_status not null default &#39;pending&#39;&lt;br&gt;created_at timestamptz not null default now()&lt;br&gt;updated_at timestamptz not null default now()&lt;br&gt;&lt;br&gt;UNIQUE(listing_id, buyer_id)" vertex="1">
+          <mxGeometry height="170" width="310" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="IcXP9a9m12b7i7FLW2My-26" parent="1" style="shape=swimlane;rounded=1;html=1;startSize=30;strokeWidth=2;dashed=1;fillColor=#ffffff;swimlaneFillColor=#fff7e6;" value="Alerts (alerts, optional)" vertex="1">
+          <mxGeometry height="150" width="310" x="510" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="IcXP9a9m12b7i7FLW2My-27" parent="IcXP9a9m12b7i7FLW2My-26" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;" value="id uuid PK default gen_random_uuid()&lt;br&gt;user_id uuid FK -&gt; users.id (on delete cascade) not null&lt;br&gt;event_id uuid FK -&gt; events.id (on delete set null)&lt;br&gt;criteria jsonb not null default &#39;{}&#39;::jsonb&lt;br&gt;enabled boolean not null default true&lt;br&gt;created_at timestamptz not null default now()" vertex="1">
+          <mxGeometry height="120" width="310" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="IcXP9a9m12b7i7FLW2My-28" parent="1" style="rounded=1;html=1;whiteSpace=wrap;strokeWidth=1;fillColor=#f8f9fa;align=left;verticalAlign=top;spacing=8;" value="Enums&lt;br&gt;&lt;br&gt;event_status: scheduled, completed, cancelled&lt;br&gt;listing_status: draft, active, sold, expired, flagged&lt;br&gt;listing_moderation_status: pending_review, approved, rejected, blocked&lt;br&gt;contact_request_status: pending, accepted, rejected, cancelled" vertex="1">
+          <mxGeometry height="110" width="400" x="280" y="1220" as="geometry" />
+        </mxCell>
+        <mxCell id="IcXP9a9m12b7i7FLW2My-29" edge="1" parent="1" source="IcXP9a9m12b7i7FLW2My-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;" target="IcXP9a9m12b7i7FLW2My-18" value="seller_id (N:1)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="495" y="530" />
+              <mxPoint x="170" y="530" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IcXP9a9m12b7i7FLW2My-30" edge="1" parent="1" source="IcXP9a9m12b7i7FLW2My-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;" target="IcXP9a9m12b7i7FLW2My-20" value="event_id (N:1)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IcXP9a9m12b7i7FLW2My-31" edge="1" parent="1" source="IcXP9a9m12b7i7FLW2My-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;" target="IcXP9a9m12b7i7FLW2My-22" value="listing_id (N:1)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IcXP9a9m12b7i7FLW2My-32" edge="1" parent="1" source="IcXP9a9m12b7i7FLW2My-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;" target="IcXP9a9m12b7i7FLW2My-18" value="buyer_id (N:1)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IcXP9a9m12b7i7FLW2My-33" edge="1" parent="1" source="IcXP9a9m12b7i7FLW2My-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;" target="IcXP9a9m12b7i7FLW2My-18" value="user_id (N:1)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="170" y="370" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IcXP9a9m12b7i7FLW2My-34" edge="1" parent="1" source="IcXP9a9m12b7i7FLW2My-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;dashed=1;" target="IcXP9a9m12b7i7FLW2My-20" value="event_id (N:0..1)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
