@@ -23,7 +23,6 @@ supabase status
 - Refer to `docs/architecture.md` for design and RLS details
 - Validation checklist is in `docs/VALIDATION.md`
 - Use `.env.example` for environment variable templates
-- Security hardening includes explicit privilege revokes to reduce GraphQL schema discoverability
 
 ## Next Steps
 
@@ -31,10 +30,10 @@ supabase status
 2. ✅ **Seed data**: 8 events, 5 users, 10 listings
 3. ✅ **RLS policies**: Enabled and documented
 
-
 ---
 
 **Ready to go!** Clone, run these 3 commands, and you're live:
+
 ```bash
 supabase start && supabase db reset && supabase status
 ```
