@@ -44,7 +44,7 @@ A:
 ## Support & Documentation
 
 - [Supabase Docs](https://supabase.com/docs)
-- [PostgreSQL RLS Guide](https://www.postgresql.org/docs/current/sql-createrole.html)
+- [PostgreSQL RLS Guide](https://www.postgresql.org/docs/current/ddl-rowsecurity.html)
 - [Project Architecture](docs/architecture.md)
 - [Environment Setup](docs/ENV_SETUP.md)
 

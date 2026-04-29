@@ -21,8 +21,8 @@
   - Keeps criteria in JSON for flexible subscription rules.
 
 ### Key design notes
-- A `public_listings` view is provided for safe browse access to only active, approved, and public listings.
-- A `public_user_profiles` view exposes only public user fields.
+- A `public_listings` view is defined to expose only active, approved, and public listings when read access is granted.
+- A `public_user_profiles` view is defined for public profile fields when read access is granted.
 - Seller contact details remain hidden unless a buyer has an accepted contact request.
 - SQL privilege revokes are used to reduce GraphQL schema discoverability for `anon` and `authenticated` roles.
 
@@ -57,7 +57,7 @@
 ### Who can see seller contact details
 - Seller contact details are stored in `users.contact_email` and `users.contact_phone`.
 - Only the seller and a buyer with an accepted `contact_requests` row can access that private information.
-- General listing browsing uses `public_listings` to avoid leaking sensitive contact info.
+- When public browsing is enabled, use `public_listings` to avoid leaking sensitive contact info.
 
 ### Buyer ↔ seller interaction
 - Buyers create a `contact_requests` row for a specific listing.
